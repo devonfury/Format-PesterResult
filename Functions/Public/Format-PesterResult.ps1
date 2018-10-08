@@ -41,6 +41,8 @@ function Format-PesterResult
         }
         else
         {
+            $report | ConvertFrom-Csv
+            <#
             $tempPath = -join($env:USERPROFILE,"\Documents\pester$((Get-Date).ToFileTimeUtc()).csv")   
             New-Item -Path $tempPath -ItemType File -Value $report -Force | Out-Null
             if(Test-Path -Path $tempPath)
@@ -49,6 +51,7 @@ function Format-PesterResult
                 write-output $objReport       
                 Remove-Item -Path $tempPath
             }
+            #>
         }
     }
     catch
