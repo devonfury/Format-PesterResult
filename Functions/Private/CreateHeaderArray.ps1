@@ -1,29 +1,31 @@
-[CmdletBinding()]
-param
-(    
-)
+function CreateHeaderArray {
+    [CmdletBinding()]
+    param
+    (    
+    )
 
-$myArray = @()
+    $myArray = @()
 
-if($PesterResult -is [Array])
-{     
-    $testResults = $PesterResult[0]   
-}
-else
-{
-    $testResults = $PesterResult
-}
-
-$describe = $testResults.TestResult[0].Describe
-foreach($result in $testResults.TestResult)
-{
-    if($describe -ne $result.Describe)
-    {
-        break
+    if($PesterResult -is [Array])
+    {     
+        $testResults = $PesterResult[0]   
     }
     else
     {
-        $myArray += $result
+        $testResults = $PesterResult
     }
+
+    $describe = $testResults.TestResult[0].Describe
+    foreach($result in $testResults.TestResult)
+    {
+        if($describe -ne $result.Describe)
+        {
+            break
+        }
+        else
+        {
+            $myArray += $result
+        }
+    }
+    write-output $myArray
 }
-write-output $myArray
