@@ -1,4 +1,4 @@
-function Create-HeaderArray
+function CreateHeaderArray
 {   
     $myArray = @()
 
